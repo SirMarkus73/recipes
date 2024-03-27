@@ -1,3 +1,3 @@
 export interface MealAPIResponse {
-    meals: { [key: string]: null | string }[];
+    meals: { [key: string]: string }[];
 }
