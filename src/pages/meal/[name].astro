@@ -15,7 +15,9 @@ const meal = result.meals[0];
 ---
 
 <Layout title={`Meal ${name}`}>
-  <main class="p-10 grid grid-cols-3 items-center place-items-center">
+  <main
+    class="p-10 grid grid-cols-3 items-center place-items-center max-md:grid-cols-1 max-lg:grid-cols-2"
+  >
     <article>
       <h1 class="text-4xl">Name: {meal.strMeal}</h1>
       <img src={meal.strMealThumb} alt={meal.strMeal} width={300} />
