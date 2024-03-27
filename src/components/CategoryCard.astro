@@ -1,0 +1,18 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+  img: string;
+  id: string;
+  title: string;
+}
+
+const { img, id, title } = Astro.props;
+
+const idNumber = parseInt(id);
+---
+
+<article class="text-center w-fit">
+  <Image src={img} alt={title} inferSize class="rounded-3xl"/>
+  {title}
+</article>
