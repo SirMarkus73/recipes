@@ -1,0 +1,26 @@
+---
+import Layout from "../layouts/Layout.astro"
+import type {MealAPIResponse} from "../types/mealApiResponse";
+
+
+const respone = await fetch("https://www.themealdb.com/api/json/v1/1/random.php")
+
+if (!respone.ok) {
+  throw new Error(`Failed to fetch data from API: ${respone.status}`);
+}
+
+
+const results = await respone.json() as MealAPIResponse;
+
+if (results) {
+    Astro.redirect(`/meal/${results.meals[0].idMeal}`)
+} else {
+    Astro.redirect("/")
+}
+
+
+
+---
+<Layout title="Random Meal">
+
+</Layout>

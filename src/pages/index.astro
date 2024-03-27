@@ -1,38 +1,32 @@
 ---
-import CategoryCard from "../components/CategoryCard.astro";
+import Image from "astro/components/Image.astro";
+import ALink from "../components/ALink.astro";
 import Layout from "../layouts/Layout.astro";
-interface AllMealsResponse {
-  categories: Category[];
-}
+import bread from "../img/bread.jpg"
 
-interface Category {
-  idCategory: string;
-  strCategory: string;
-  strCategoryThumb: string;
-  strCategoryDescription: string;
-}
-
-const API_URL = "https://www.themealdb.com/api/json/v1/1/categories.php";
-const respone = await fetch(API_URL);
-
-if (!respone.ok) {
-  throw new Error(`Failed to fetch data from API: ${respone.status}`);
-}
-
-const results = (await respone.json()) as AllMealsResponse;
+export const prerender = true;
 ---
 
-<Layout title="Categorys">
-	<h1 class="text-4xl text-center py-4">Meals Category</h1>
-  <main class="p-3 grid grid-cols-3 gap-5 place-items-center max-md:grid-cols-1 max-xl:grid-cols-2">
-    {
-      results.categories.map((category) => (
-        <CategoryCard
-          img={category.strCategoryThumb}
-          id={category.idCategory}
-          title={category.strCategory}
-        ></CategoryCard>
-      ))
-    }
+<Layout title="The Best Recipes">
+  <main class="flex justify-center py-20 flex-col flex-wrap gap-8 text-2xl items-center text-justify">
+    <p class="w-2/3 text-wrap">
+      Welcome to our recipe page! We are an online recipe search engine that
+      allows you to explore a wide variety of delicious dishes. Whether you're
+      looking for a recipe by category, by specific dish name, or simply want to
+      be surprised with a random choice, you're in the right place! Our mission
+      is to help you discover new and exciting recipes to inspire your culinary
+      adventures. Explore, cook, and enjoy!
+    </p>
+
+    <Image src={bread} alt={"bread"} width={300}></Image>
+
+    <nav class=" flex flex-col text-wrap border-2 border-solid border-pink-800 p-10 gap-10 text-center">
+      Don't wait any longer to discover our amazing recipes! Click on the links
+      below and dive into a world of flavors and delights.
+
+      <ALink href="/category">Search by category</ALink>
+      <ALink href="/meal">Search by meal</ALink>
+      <ALink href="/random-meal">Random Recipe</ALink>
+    </nav>
   </main>
 </Layout>

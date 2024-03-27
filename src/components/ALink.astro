@@ -1,0 +1,13 @@
+---
+interface Props {
+  href: string;
+}
+
+const { href } = Astro.props;
+---
+
+<a href={href}
+    class="text-lg hover:text-rose-600 transition-colors"    
+>
+    <slot /> 
+</a>

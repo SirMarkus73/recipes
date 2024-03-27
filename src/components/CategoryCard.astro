@@ -3,16 +3,17 @@ import { Image } from "astro:assets";
 
 interface Props {
   img: string;
-  id: string;
-  title: string;
+  category: string;
 }
 
-const { img, id, title } = Astro.props;
+const { img, category } = Astro.props;
 
-const idNumber = parseInt(id);
+
 ---
 
-<article class="text-center w-fit">
-  <Image src={img} alt={title} inferSize class="rounded-3xl"/>
-  {title}
+<article class="text-center w-fit text-2xl">
+  <a href={`/category/${category}`}>
+    <Image src={img} alt={category} inferSize class="rounded-3xl" />
+    {category}
+  </a>
 </article>

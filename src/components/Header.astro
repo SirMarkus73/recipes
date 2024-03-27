@@ -1,11 +1,13 @@
 ---
+import Link from "./ALink.astro";
 ---
 
-<header class="text-center py-3">
-    <h1 class="text-5xl py-2">Test Header</h1>
-    <nav class="flex flex-row justify-center gap-20 max-md:flex-col max-md:gap-5">
-        <a href="#">Recipes Category</a>
-        <a href="#">Search Recipes</a>
-        <a href="#">Random Recipe</a>
+<header class="text-center py-3 flex flex-row justify-between items-center px-4 shadow-sm shadow-white hover:shadow-zinc-700 transition-shadow max-lg:flex-col">
+    <h1 class="text-5xl py-2">The Best Recipes</h1>
+    <nav class="flex flex-row gap-8">
+        <Link href="/">Home</Link>
+        <Link href="/category">Search by category</Link>
+        <Link href="/meal">Search by meal</Link>
+        <Link href="/random-meal">Random Recipe</Link>
     </nav>
 </header>
