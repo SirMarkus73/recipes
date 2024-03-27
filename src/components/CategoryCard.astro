@@ -13,7 +13,7 @@ const { img, category } = Astro.props;
 
 <article class="text-center w-fit text-2xl">
   <a href={`/category/${category}`}>
-    <Image src={img} alt={category} inferSize class="rounded-3xl" />
+    <img src={img} alt={category} class="rounded-3xl" />
     {category}
   </a>
 </article>
