@@ -1,13 +1,19 @@
 ---
 interface Props {
   href: string | null;
+  target?: "_blank" | null;
+  hidden?: string | null;
 }
 
-const { href } = Astro.props;
+const { href, target, hidden } = Astro.props;
 ---
 
-<a href={href}
-    class="text-lg hover:text-rose-600 transition-colors"    
+<a
+  href={href}
+  target={target}
+  class="text-lg hover:text-rose-600 transition-colors"
+  class:list={["text-lg hover:text-rose-600 transition-colors", hidden]}
+  aria-label={href}
 >
-    <slot /> 
+  <slot />
 </a>

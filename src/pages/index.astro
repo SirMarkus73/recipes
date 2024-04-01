@@ -2,13 +2,15 @@
 import Image from "astro/components/Image.astro";
 import ALink from "../components/ALink.astro";
 import Layout from "../layouts/Layout.astro";
-import bread from "../img/bread.jpg"
+import bread from "../img/bread.jpg";
 
 export const prerender = true;
 ---
 
 <Layout title="The Best Recipes">
-  <main class="flex justify-center py-20 flex-col flex-wrap gap-8 text-2xl items-center text-justify">
+  <main
+    class="flex justify-center py-20 flex-col flex-wrap gap-8 text-2xl items-center text-justify"
+  >
     <p class="w-2/3 text-wrap">
       Welcome to our recipe page! We are an online recipe search engine that
       allows you to explore a wide variety of delicious dishes. Whether you're
@@ -18,9 +20,11 @@ export const prerender = true;
       adventures. Explore, cook, and enjoy!
     </p>
 
-    <Image src={bread} alt={"bread"} width={300}></Image>
+    <Image src={bread} alt={"bread"} width={300} />
 
-    <nav class=" flex flex-col text-wrap border-2 border-solid border-pink-800 p-10 gap-10 text-center">
+    <nav
+      class="flex flex-col text-wrap border-2 border-solid border-pink-800 p-10 gap-10 text-center"
+    >
       Don't wait any longer to discover our amazing recipes! Click on the links
       below and dive into a world of flavors and delights.
 

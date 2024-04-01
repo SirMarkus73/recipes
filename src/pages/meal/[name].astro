@@ -1,8 +1,9 @@
 ---
-import { Image } from "astro:assets";
 import ALink from "../../components/ALink.astro";
+import YoutubeIcon from "../../icons/YoutubeIcon.astro";
+import ArticleIcon from "../../icons/ArticleIcon.astro";
 import Layout from "../../layouts/Layout.astro";
-import type { MealAPIResponse } from "../../types/mealApiResponse";
+import { type MealAPIResponse } from "../../types/mealApiResponse";
 
 const { name } = Astro.params;
 
@@ -12,26 +13,28 @@ const respone = await fetch(API_URL);
 const result = (await respone.json()) as MealAPIResponse;
 
 const meal = result.meals[0];
+
+const hasYoutube = meal.strYoutube ? null : "hidden";
+const hasArticle = meal.strSource ? null : "hidden";
 ---
 
 <Layout title={`Meal ${name}`}>
   <main
-    class="p-10 grid grid-cols-3 items-center place-items-center max-md:grid-cols-1 max-lg:grid-cols-2"
+    class="p-10 grid grid-cols-2 items-center place-items-center max-md:grid-cols-1 max-lg:grid-cols-2"
   >
-    <article>
-      <h1 class="text-4xl">Name: {meal.strMeal}</h1>
+    <article class="flex flex-col gap-5 justify-center items-center">
+      <h1 class="text-5xl text-rose-700">{meal.strMeal}</h1>
       <img src={meal.strMealThumb} alt={meal.strMeal} width={300} />
       <h2 class="text-3xl">Category: {meal.strCategory}</h2>
       <h3 class="text-2xl">Area: {meal.strArea}</h3>
-    </article>
-    <article>
-      <h3 class="text-2xl">
-        Video: <ALink href={meal.strYoutube}>{meal.strYoutube}</ALink>
-      </h3>
-
-      <h3 class="text-2xl">
-        Article: <ALink href={meal.strSource}>{meal.strSource}</ALink>
-      </h3>
+      <nav class="flex flex-row justify-between gap-8">
+        <ALink href={meal.strYoutube} target={"_blank"} hidden={hasYoutube}
+          ><YoutubeIcon /></ALink
+        >
+        <ALink href={meal.strSource} target={"_blank"} hidden={hasArticle}
+          ><ArticleIcon /></ALink
+        >
+      </nav>
     </article>
     <article>
       <h3 class="text-2xl">Instructions:</h3>

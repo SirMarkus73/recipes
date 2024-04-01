@@ -6,7 +6,7 @@ const respone = await fetch(
 );
 
 if (!respone.ok) {
-  throw new Error(`Failed to fetch data from API: ${respone.status}`);
+  Astro.redirect("/");
 }
 
 const results = (await respone.json()) as MealAPIResponse;
