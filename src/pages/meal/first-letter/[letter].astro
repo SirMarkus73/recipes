@@ -1,0 +1,79 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import ALink from "../../../components/ALink.astro";
+import { type MealAPIResponse } from "../../../types/mealApiResponse";
+
+const { letter } = Astro.params;
+
+const alphabet = [
+  "A",
+  "B",
+  "C",
+  "D",
+  "E",
+  "F",
+  "G",
+  "H",
+  "I",
+  "J",
+  "K",
+  "L",
+  "M",
+  "N",
+  "O",
+  "P",
+  "Q",
+  "R",
+  "S",
+  "T",
+  "U",
+  "V",
+  "W",
+  "X",
+  "Y",
+  "Z",
+];
+
+if (letter !== undefined && !alphabet.includes(letter.toLocaleUpperCase())) {
+  return Astro.redirect(`/meal/first-letter/a`);
+}
+
+const API_URL = `https://www.themealdb.com/api/json/v1/1/search.php?f=${letter}`;
+const response = await fetch(API_URL);
+
+if (!response.ok) {
+  return Astro.redirect("/");
+}
+
+const results = (await response.json()) as MealAPIResponse;
+
+if (results.meals === null) {
+  return Astro.redirect("/meal");
+}
+---
+
+<Layout title={`Meals starting by letter ${letter}`}>
+  <main class="grid grid-cols-3 gap-10 place-items-center p-8">
+    {
+      results.meals.map((meal) => (
+        <a href={`/meal/${meal.strMeal}`}>
+          <article class="w-fit flex justify-center flex-wrap flex-col items-center gap-3 bg-neutral-950 p-8 content-center border-2 rounded-md max-md:p-4 max-sm:p-2">
+            <h3 class="text-2xl">{meal.strMeal}</h3>
+            <img class="w-40" src={meal.strMealThumb} alt={meal.strMeal} />
+          </article>
+        </a>
+      ))
+    }
+    <nav
+      class="fixed bottom-0 flex justify-center gap-5 w-[100vw] max-md:gap-2 max-lg:gap-3 bg-neutral-900 p-2"
+    >
+      {
+        alphabet.map((letter) => (
+          <ALink href={`/meal/first-letter/${letter.toLowerCase()}`}>
+            {letter}
+          </ALink>
+        ))
+      }
+    </nav>
+  </main>
+</Layout>
